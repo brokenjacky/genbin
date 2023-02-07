@@ -7,6 +7,13 @@
 ### how to use
 ```go
 
+package main
+
+import (
+    "fmt"
+    "github.com/brokenjacky/genbin/parse"
+)
+
 type Test struct {
     CommandLength uint32
     ByteID        byte
@@ -27,12 +34,9 @@ func register(st ...interface{}) {
             continue
         }
 
-        j, _ := json.Marshal(tpl)
-        fmt.Println(string(j))
+        tpl.Package = "test"
 
-        tpl.Package = "pdu"
-
-        parse.Generate(tpl, parse.WithTemplateName(genList), parse.WithFuncMap(funcMap))
+        parse.Generate(tpl, parse.WithTemplateName(genList))
     }
 }
 
@@ -40,11 +44,11 @@ func main() {
 
     register(Test{})
     tpl := parse.MetaData{
-        Package:    "pdu",
+        Package:    "test",
         StructName: "log",
     }
     parse.Generate(&tpl, parse.WithTemplateName([]string{tpl.StructName}))
-    
+
     tpl.StructName = "mod"
     parse.Generate(&tpl, parse.WithTemplateName([]string{tpl.StructName}), parse.WithFileName("go.mod"))
 }

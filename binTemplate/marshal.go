@@ -7,7 +7,6 @@ func ({{.Package}} *{{.StructName}}) Marshal() []byte {
 {{- range .Fields }}
     {{- if .Skip}} {{continue}} {{- end}}
 
-    {{- test .Name -}}
     {{- if eq .Name .Type}}
 
     b.Write({{$.Package}}.{{ .Name }}.Marshal())

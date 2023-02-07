@@ -4,7 +4,7 @@ import (
     "text/template"
     "fmt"
     "bytes"
-    "genbin/binTemplate"
+    "github.com/brokenjacky/genbin/binTemplate"
     "strings"
     "os"
 )
